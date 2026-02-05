@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Water Cycle Animation</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#eaf6ff;
+  font-family:system-ui,sans-serif;
+}
+
+.scene{
+  position:relative;
+  width:680px;
+  height:460px;
+  background:linear-gradient(#87ceeb 40%, #cfefff);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.sun{
+  position:absolute;
+  top:40px;
+  left:110px;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#fde047;
+  box-shadow:0 0 35px rgba(253,224,71,.6),0 0 90px rgba(253,224,71,.25);
+}
+
+.ray{
+  position:absolute;
+  top:120px;
+  left:155px;
+  width:6px;
+  height:0;
+  background:linear-gradient(#fde047, transparent);
+  opacity:0;
+  animation:rays 14s infinite;
+}
+
+.ray.second{
+  left:168px;
+  transform:rotate(-10deg);
+}
+
+@keyframes rays{
+  0%,12%{height:0;opacity:0;}
+  20%,38%{height:260px;opacity:1;}
+  50%,100%{opacity:0;}
+}
+
+.cloud{
+  position:absolute;
+  top:40px;
+  right:130px;
+  width:200px;
+  height:70px;
+  background:#cbd5e1;
+  border-radius:40px;
+  opacity:0;
+  animation:cloudBuild 14s infinite ease-in-out;
+}
+
+.cloud.secondary{
+  right:70px;
+  transform:scale(.85);
+  animation-delay:2s;
+}
+
+.cloud::before,
+.cloud::after{
+  content:"";
+  position:absolute;
+  background:#cbd5e1;
+  border-radius:50%;
+}
+
+.cloud::before{
+  width:90px;
+  height:90px;
+  top:-40px;
+  left:30px;
+}
+
+.cloud::after{
+  width:110px;
+  height:110px;
+  top:-50px;
+  right:25px;
+}
+
+@keyframes cloudBuild{
+  0%,60%{opacity:0;transform:scale(.85);}
+  76%{opacity:.7;transform:scale(1);}
+  100%{opacity:1;}
+}
+
+.rain span{
+  position:absolute;
+  top:140px;
+  right:190px;
+  width:2px;
+  height:28px;
+  background:#bae6fd;
+  opacity:0;
+  animation:rain 14s infinite ease-in;
+}
+
+.rain span:nth-child(1){margin-right:-40px;}
+.rain span:nth-child(2){margin-right:-20px;}
+.rain span:nth-child(3){margin-right:0;}
+.rain span:nth-child(4){margin-right:20px;}
+
+@keyframes rain{
+  0%,78%{opacity:0;transform:translateY(0);}
+  84%{opacity:1;}
+  96%{transform:translateY(200px);opacity:0;}
+  100%{opacity:0;}
+}
+
+.droplets span{
+  position:absolute;
+  bottom:160px;
+  left:50%;
+  width:6px;
+  height:6px;
+  background:#e0f2fe;
+  border-radius:50%;
+  opacity:0;
+  animation:rise 14s infinite ease-in-out;
+}
+
+.droplets span:nth-child(1){margin-left:-70px;}
+.droplets span:nth-child(2){margin-left:-40px;animation-delay:.4s;}
+.droplets span:nth-child(3){margin-left:-10px;animation-delay:.8s;}
+.droplets span:nth-child(4){margin-left:20px;animation-delay:1.2s;}
+.droplets span:nth-child(5){margin-left:50px;animation-delay:1.6s;}
+
+@keyframes rise{
+  0%,28%{transform:translateY(0) scale(1);opacity:0;}
+  38%{opacity:.9;}
+  60%{transform:translateY(-260px) scale(.55);opacity:.4;}
+  72%,100%{opacity:0;}
+}
+
+.sea{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:220px;
+  overflow:hidden;
+}
+
+.wave{
+  position:absolute;
+  bottom:0;
+  width:200%;
+  border-radius:100% 100% 0 0;
+  animation:waveMove linear infinite;
+}
+
+.wave.one{
+  height:120px;
+  background:#3b82f6;
+  opacity:.9;
+  animation-duration:8s;
+}
+
+.wave.two{
+  height:150px;
+  background:#2563eb;
+  opacity:.75;
+  animation-duration:12s;
+}
+
+.wave.three{
+  height:180px;
+  background:#1e40af;
+  opacity:.65;
+  animation-duration:16s;
+}
+
+@keyframes waveMove{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+  <div class="sun"></div>
+  <div class="ray"></div>
+  <div class="ray second"></div>
+
+  <div class="cloud"></div>
+  <div class="cloud secondary"></div>
+
+  <div class="rain">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="droplets">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="sea">
+    <div class="wave one"></div>
+    <div class="wave two"></div>
+    <div class="wave three"></div>
+  </div>
+
+</div>
+
+</body>
+</html>
